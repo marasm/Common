@@ -1,9 +1,1 @@
-[Bb]in
-/dist
-**/*.log
-.gradle
-.settings/
-.classpath
-.project
-.DS_Store
-
+/bin/
