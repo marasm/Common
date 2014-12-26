@@ -57,5 +57,24 @@ public class StringUtil
     res.append(NumberFormat.getPercentInstance().format(inProgress));
     return res.toString();
   }
+  
+  public static String leftZeroPadNumber(int inNumber, int inStringSize)
+  {
+    String res = String.valueOf(inNumber);
+    
+    if (res.length() >= inStringSize)
+      return res;
+    else
+    {
+      String padding = "";
+      for (int i = 0; i < inStringSize - res.length(); i++)
+      {
+        padding += "0";
+      }
+      res = padding + res;
+    }
+    
+    return res;
+  }
 
 }

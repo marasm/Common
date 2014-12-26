@@ -29,7 +29,23 @@ public class TestStringUtil
         StringUtil.getProgressBarString(.5));
   }
   
+  @Test
+  public void testleftZeroPadNumber_PAD_10_TO_12digts()
+  {
+    assertEquals("000000000010", StringUtil.leftZeroPadNumber(10, 12));
+  }
+
   
-  
+  @Test
+  public void testleftZeroPadNumber_PAD_LARGE_NUMBER_TO_SMALLER_SIZE()
+  {
+    assertEquals("1000000", StringUtil.leftZeroPadNumber(1000000, 3));
+  }
+
+  @Test
+  public void testleftZeroPadNumber_ZERO_INPUTS()
+  {
+    assertEquals("0", StringUtil.leftZeroPadNumber(0, 0));
+  }
 
 }
