@@ -3,12 +3,23 @@
  */
 package com.marasm.util;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author mkorotkovas
  *
  */
 public class FileUtil
 {
+  public static final List<String> IMAGE_FILE_EXT = Arrays.asList(
+      ".png",".jpg");
+  public static final List<String> VIDEO_FILE_EXT = Arrays.asList(
+      ".avi");
+  
+  
+  
   public static String getExtentionFromFileName(String inFileName)
   {
     if (StringUtil.isEmpty(inFileName))
@@ -67,4 +78,24 @@ public class FileUtil
       return result;
     }
   }
+  
+  public static boolean isAnImageFile(File inFile)
+  {
+    return inFile != null &&
+        inFile.exists() &&
+        inFile.isFile() && 
+        IMAGE_FILE_EXT.contains(getExtentionFromFileName(
+                inFile.getName()).toLowerCase());
+  }
+
+  public static boolean isAVideoFile(File inFile)
+  {
+    return inFile != null &&
+        inFile.exists() &&
+        inFile.isFile() &&
+        VIDEO_FILE_EXT.contains(
+            FileUtil.getExtentionFromFileName(
+                inFile.getName().toLowerCase()));
+  }
+  
 }
