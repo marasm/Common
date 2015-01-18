@@ -14,9 +14,9 @@ import java.util.List;
 public class FileUtil
 {
   public static final List<String> IMAGE_FILE_EXT = Arrays.asList(
-      ".png",".jpg");
+      ".png",".jpg",".jpeg");
   public static final List<String> VIDEO_FILE_EXT = Arrays.asList(
-      ".avi");
+      ".avi",".mp4",".m4p",".mov",".mvi");
   
   
   
