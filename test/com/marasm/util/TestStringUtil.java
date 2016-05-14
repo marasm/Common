@@ -1,6 +1,6 @@
 package com.marasm.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -46,6 +46,36 @@ public class TestStringUtil
   public void testleftZeroPadNumber_ZERO_INPUTS()
   {
     assertEquals("0", StringUtil.leftZeroPadNumber(0, 0));
+  }
+  
+  @Test
+  public void testRemoveSubStringFromString_NULL() throws Exception
+  {
+    assertNull(StringUtil.removeSubStringFromString(null, null));
+  }
+
+  @Test
+  public void testRemoveSubStringFromString_EMPTY() throws Exception
+  {
+    assertEquals("", StringUtil.removeSubStringFromString("", ""));
+  }
+
+  @Test
+  public void testRemoveSubStringFromString_NOTHING_TO_REMOVE() throws Exception
+  {
+    assertEquals("testStringIsTest", StringUtil.removeSubStringFromString("testStringIsTest", ""));
+  }
+
+  @Test
+  public void testRemoveSubStringFromString_NO_MATCH() throws Exception
+  {
+    assertEquals("testStringIsTest", StringUtil.removeSubStringFromString("testStringIsTest", "hello"));
+  }
+
+  @Test
+  public void testRemoveSubStringFromString_SUCCESS() throws Exception
+  {
+    assertEquals("testIsTest", StringUtil.removeSubStringFromString("testStringIsTest", "String"));
   }
 
 }

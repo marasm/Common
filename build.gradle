@@ -1,0 +1,48 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.8
+
+allprojects
+{
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+}
+
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile        'org.slf4j:slf4j-api:1.7.21',
+                   'org.apache.logging.log4j:log4j-slf4j-impl:2.5',
+                   'org.apache.logging.log4j:log4j-api:2.5',
+                   'org.apache.logging.log4j:log4j-core:2.5'
+                   
+    testCompile    'junit:junit:4.10'
+}
+
+sourceSets{
+ main
+  {
+    java
+    {
+      srcDirs = ['src']
+    }
+    
+  }
+  test
+  {
+    java
+    {
+      srcDirs = ['test']
+    }
+  }  
+}
+
+
+jar {
+  archiveName = "common.jar"
+}

@@ -76,5 +76,21 @@ public class StringUtil
     
     return res;
   }
+  
+  public static String removeSubStringFromString(String inStr, String inStrToRemove)
+  {
+    if (isEmpty(inStr) || isEmpty(inStrToRemove))
+    {
+      return inStr;
+    }
+    
+    int indexOfSubStr = inStr.indexOf(inStrToRemove);
+    if (indexOfSubStr < 0)
+    {
+      return inStr;
+    }
+    
+    return inStr.substring(0, indexOfSubStr) + inStr.substring(indexOfSubStr +  inStrToRemove.length(), inStr.length());
+  }
 
 }
