@@ -24,6 +24,72 @@ public class AppLogger
   }
   
   
+  public static void debug(String inMessage)
+  {
+    log(LogLevel.DEBUG, inMessage);
+  }
+
+  public static void debug(String inMessage, Object... inArgs)
+  {
+    log(LogLevel.DEBUG, inMessage, inArgs);
+  }
+
+  public static void debug(String inMessage, Throwable inException)
+  {
+    log(LogLevel.DEBUG, inMessage, inException);
+  }
+  
+  
+  public static void info(String inMessage)
+  {
+    log(LogLevel.INFO, inMessage);
+  }
+  
+  public static void info(String inMessage, Object... inArgs)
+  {
+    log(LogLevel.INFO, inMessage, inArgs);
+  }
+  
+  public static void info(String inMessage, Throwable inException)
+  {
+    log(LogLevel.INFO, inMessage, inException);
+  }
+  
+  
+  public static void warn(String inMessage)
+  {
+    log(LogLevel.WARNING, inMessage);
+  }
+  
+  public static void warn(String inMessage, Object... inArgs)
+  {
+    log(LogLevel.WARNING, inMessage, inArgs);
+  }
+  
+  public static void warn(String inMessage, Throwable inException)
+  {
+    log(LogLevel.WARNING, inMessage, inException);
+  }
+  
+  
+  public static void error(String inMessage)
+  {
+    log(LogLevel.ERROR, inMessage);
+  }
+  
+  public static void error(String inMessage, Object... inArgs)
+  {
+    log(LogLevel.ERROR, inMessage, inArgs);
+  }
+  
+  public static void error(String inMessage, Throwable inException)
+  {
+    log(LogLevel.ERROR, inMessage, inException);
+  }
+  
+  
+  
+  
   private static Logger getLogger()
   {
     if (StringUtil.isEmpty(loggerName))
@@ -37,11 +103,10 @@ public class AppLogger
   }
   
   
-  public static void log(LogLevel inLogLevel, String inMsg)
+  private static void log(LogLevel inLogLevel, String inMsg)
   {
     Logger logger = getLogger(); 
-    Class<?> clazz = Util.getCallingClass();
-    String logStr = "[" + clazz.getSimpleName() + "] - " + inMsg;
+    String logStr = addCallingClassToMessage(inMsg);
     
     switch (inLogLevel)
     {
@@ -67,11 +132,12 @@ public class AppLogger
     }
   }
 
-  public static void log( LogLevel inLogLevel, String inMsg, Object... inArgs)
+
+  private static void log(LogLevel inLogLevel, 
+    String inMsg, Object... inArgs)
   {
     Logger logger = getLogger();
-    Class<?> clazz = Util.getCallingClass();
-    String logStr = "[" + clazz.getSimpleName() + "] - " + inMsg;
+    String logStr = addCallingClassToMessage(inMsg);
     switch (inLogLevel)
     {
       case DEBUG:
@@ -95,11 +161,11 @@ public class AppLogger
         break;
     }
   }
-  public static void log(LogLevel inLogLevel, String inMsg, Throwable inException)
+  private static void log(LogLevel inLogLevel, String inMsg, 
+    Throwable inException)
   {
     Logger logger = getLogger();
-    Class<?> clazz = Util.getCallingClass();
-    String logStr = "[" + clazz.getSimpleName() + "] - " + inMsg;
+    String logStr = addCallingClassToMessage(inMsg);
     switch (inLogLevel)
     {
       case DEBUG:
@@ -124,6 +190,20 @@ public class AppLogger
     }
   }
 
+  private static String addCallingClassToMessage(String inMsg)
+  {
+    Class<?> clazz = Util.getCallingClass();
+    String logStr = "[" + clazz.getSimpleName() + "] - " + inMsg;
+    return logStr;
+  }
+
+  private enum LogLevel
+  {
+    DEBUG,
+    INFO,
+    WARNING,
+    ERROR
+  }
   
   
 }
