@@ -5,7 +5,6 @@ package com.marasm.logger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.helpers.Util;
 
 import com.marasm.util.StringUtil;
 
@@ -129,11 +128,36 @@ public class AppLogger
   
   private static String addCallingClassToMessage(String inMsg)
   {
-    Class<?> clazz = Util.getCallingClass();
-    String logStr = "[" + clazz.getSimpleName() + "] - " + inMsg;
+    String callingClazz = getCallingClassName();
+    String logStr = "[" + callingClazz + "] - " + inMsg;
     return logStr;
   }
 
+  
+  private static String getCallingClassName()
+  {
+    StackTraceElement[] stackTrace = new Exception().getStackTrace();
+    try
+    {
+      for (int i = 0; i < stackTrace.length; i++)
+      {
+        StackTraceElement stElem = stackTrace[i];
+        if (!AppLogger.class.getName().equals(stElem.getClassName()) && 
+          !stElem.getClassName().contains("Logger"))
+        {
+          return Class.forName(stElem.getClassName()).getSimpleName();
+        }
+      }
+      
+      //unable to find a caller that is not the logger itself. Will use the top most caller.
+      return Class.forName(stackTrace[stackTrace.length - 1].getClassName()).getSimpleName();
+      
+    }
+    catch (Exception e)
+    {
+      return "UNKNOWN";
+    }
+  }
   
   
 }
