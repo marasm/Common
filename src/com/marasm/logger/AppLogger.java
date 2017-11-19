@@ -26,65 +26,89 @@ public class AppLogger
   
   public static void debug(String inMessage)
   {
-    log(LogLevel.DEBUG, inMessage);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.debug(logStr);
   }
 
   public static void debug(String inMessage, Object... inArgs)
   {
-    log(LogLevel.DEBUG, inMessage, inArgs);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.debug(logStr, inArgs);
   }
 
   public static void debug(String inMessage, Throwable inException)
   {
-    log(LogLevel.DEBUG, inMessage, inException);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.debug(logStr, inException);
   }
   
   
   public static void info(String inMessage)
   {
-    log(LogLevel.INFO, inMessage);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.info(logStr); 
   }
   
   public static void info(String inMessage, Object... inArgs)
   {
-    log(LogLevel.INFO, inMessage, inArgs);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.info(logStr, inArgs);
   }
   
   public static void info(String inMessage, Throwable inException)
   {
-    log(LogLevel.INFO, inMessage, inException);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.info(logStr, inException);
   }
   
   
   public static void warn(String inMessage)
   {
-    log(LogLevel.WARNING, inMessage);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.warn(logStr, inMessage);
   }
   
   public static void warn(String inMessage, Object... inArgs)
   {
-    log(LogLevel.WARNING, inMessage, inArgs);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.warn(logStr, inArgs);
   }
   
   public static void warn(String inMessage, Throwable inException)
   {
-    log(LogLevel.WARNING, inMessage, inException);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.warn(logStr, inException);
   }
   
   
   public static void error(String inMessage)
   {
-    log(LogLevel.ERROR, inMessage);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.error(logStr);
   }
   
   public static void error(String inMessage, Object... inArgs)
   {
-    log(LogLevel.ERROR, inMessage, inArgs);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.error(logStr, inArgs);
   }
   
   public static void error(String inMessage, Throwable inException)
   {
-    log(LogLevel.ERROR, inMessage, inException);
+    Logger logger = getLogger(); 
+    String logStr = addCallingClassToMessage(inMessage);
+    logger.error(logStr, inException);
   }
   
   
@@ -103,93 +127,6 @@ public class AppLogger
   }
   
   
-  private static void log(LogLevel inLogLevel, String inMsg)
-  {
-    Logger logger = getLogger(); 
-    String logStr = addCallingClassToMessage(inMsg);
-    
-    switch (inLogLevel)
-    {
-      case DEBUG:
-        logger.debug(logStr);
-        break;
-      
-      case INFO:
-        logger.info(logStr);
-        break;
-      
-      case WARNING:
-        logger.warn(logStr);
-        break;
-
-      case ERROR:
-        logger.error(logStr);
-        break;
-      
-      default:
-        logger.debug(logStr);
-        break;
-    }
-  }
-
-
-  private static void log(LogLevel inLogLevel, 
-    String inMsg, Object... inArgs)
-  {
-    Logger logger = getLogger();
-    String logStr = addCallingClassToMessage(inMsg);
-    switch (inLogLevel)
-    {
-      case DEBUG:
-        logger.debug(logStr, inArgs);
-        break;
-        
-      case INFO:
-        logger.info(logStr, inArgs);
-        break;
-        
-      case WARNING:
-        logger.warn(logStr, inArgs);
-        break;
-        
-      case ERROR:
-        logger.error(logStr, inArgs);
-        break;
-        
-      default:
-        logger.debug(logStr, inArgs);
-        break;
-    }
-  }
-  private static void log(LogLevel inLogLevel, String inMsg, 
-    Throwable inException)
-  {
-    Logger logger = getLogger();
-    String logStr = addCallingClassToMessage(inMsg);
-    switch (inLogLevel)
-    {
-      case DEBUG:
-        logger.debug(logStr, inException);
-        break;
-        
-      case INFO:
-        logger.info(logStr, inException);
-        break;
-        
-      case WARNING:
-        logger.warn(logStr, inException);
-        break;
-        
-      case ERROR:
-        logger.error(logStr, inException);
-        break;
-        
-      default:
-        logger.debug(logStr, inException);
-        break;
-    }
-  }
-
   private static String addCallingClassToMessage(String inMsg)
   {
     Class<?> clazz = Util.getCallingClass();
@@ -197,13 +134,6 @@ public class AppLogger
     return logStr;
   }
 
-  private enum LogLevel
-  {
-    DEBUG,
-    INFO,
-    WARNING,
-    ERROR
-  }
   
   
 }
